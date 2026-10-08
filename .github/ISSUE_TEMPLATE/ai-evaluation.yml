@@ -1,0 +1,27 @@
+name: AI evaluation
+description: Add or improve a measurable AI evaluation case.
+title: "eval: "
+labels: ["ai", "evaluation"]
+body:
+  - type: textarea
+    id: risk
+    attributes:
+      label: AI risk or behavior
+      description: Which failure mode or quality dimension is under test?
+    validations:
+      required: true
+  - type: textarea
+    id: cases
+    attributes:
+      label: Test cases
+      description: Describe inputs, expected evidence, and allowed uncertainty.
+    validations:
+      required: true
+  - type: textarea
+    id: metric
+    attributes:
+      label: Metric and rubric
+      description: Explain how the result will be scored without inventing data.
+    validations:
+      required: true
+

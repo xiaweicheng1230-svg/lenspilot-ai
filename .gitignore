@@ -1,0 +1,36 @@
+# Environment and secrets
+.env
+.env.local
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.venv/
+venv/
+*.egg-info/
+
+# Node.js / Next.js
+node_modules/
+.next/
+out/
+coverage/
+
+# Runtime data
+data/
+uploads/
+backend/data/
+backend/uploads/
+
+# Editors and operating systems
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+

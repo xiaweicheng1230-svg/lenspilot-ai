@@ -1,0 +1,39 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    environment:
+      APP_ENV: development
+      DATABASE_URL: sqlite:////app/data/lenspilot.db
+      UPLOAD_DIR: /app/uploads
+      CORS_ORIGINS: http://localhost:3000
+      MOCK_AI: ${MOCK_AI:-true}
+      AI_API_KEY: ${AI_API_KEY:-}
+      AI_MODEL: ${AI_MODEL:-}
+      AI_BASE_URL: ${AI_BASE_URL:-}
+    ports:
+      - "8000:8000"
+    volumes:
+      - lenspilot_data:/app/data
+      - lenspilot_uploads:/app/uploads
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/v1/health')"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  frontend:
+    build:
+      context: ./frontend
+    environment:
+      NEXT_PUBLIC_API_BASE_URL: http://localhost:8000/api/v1
+    ports:
+      - "3000:3000"
+    depends_on:
+      backend:
+        condition: service_healthy
+
+volumes:
+  lenspilot_data:
+  lenspilot_uploads:
+

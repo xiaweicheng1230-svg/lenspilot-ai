@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: lenspilot-api
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install .
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: APP_ENV
+        value: production
+      - key: MOCK_AI
+        value: true
+      - key: DATA_DIR
+        value: /tmp/lenspilot/data
+      - key: UPLOAD_DIR
+        value: /tmp/lenspilot/uploads
+      - key: DATABASE_URL
+        value: sqlite:////tmp/lenspilot/data/lenspilot.db
+      - key: CORS_ORIGINS
+        value: http://localhost:3000
+      - key: CORS_ORIGIN_REGEX
+        value: https://.*\.vercel\.app
+
